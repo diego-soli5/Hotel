@@ -1,0 +1,57 @@
+﻿@model Hotel.WebApp.ViewModels.Reservacion.ReservacionCreateViewModel
+@{
+    ViewData["Title"] = "Reservaciones";
+}
+
+<section class="content-header">
+    <div class="text-center">
+        <h1>CREAR RESERVACIÓN</h1>
+    </div>
+</section>
+
+<section class="content invoice">
+    <div class="">
+        <form asp-controller="Reservacion" asp-action="Crear" method="post" class="" id="frm">
+            <div class="form-group">
+                <label asp-for="Reservacion.TnIdCliente">Cliente</label>
+                @Html.DropDownList("TnIdCliente", Model.ClienteSelectListItems, "Seleccionar Cliente", new { @class = "form-control" })
+                <span asp-validation-for="Reservacion.TnIdCliente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservacion.TnIdHabitacion">Habitación</label>
+                @Html.DropDownList("TnIdHabitacion", Model.HabitacionSelectListItems, "Seleccionar Habitación", new { @class = "form-control" })
+                <span asp-validation-for="Reservacion.TnIdHabitacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservacion.TfFecInicio">Fecha Inicio</label>
+                <input asp-for="Reservacion.TfFecInicio" class="form-control" placeholder="Fecha Inicio" type="date">
+                <span asp-validation-for="Reservacion.TfFecInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservacion.TfFecFin">Fecha Fin</label>
+                <input asp-for="Reservacion.TfFecFin" class="form-control" placeholder="Fecha Fin" type="date">
+                <span asp-validation-for="Reservacion.TfFecFin" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+
+    <div class="">
+        <button type="submit" form="frm" class="btn btn-primary">Crear</button>
+        <a asp-controller="Reservacion"
+           asp-action="Index"
+           class="btn btn-danger">Cancelar</a>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    @if (ViewData["ActionResult"] != null)
+    {
+        <script>
+            toastr["error"]("@ViewData["ActionResult"].ToString()", "Crear Reservacion")
+        </script>
+    }
+}

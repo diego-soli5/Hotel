@@ -1,0 +1,42 @@
+﻿@model Hotel.WebApp.Models.TipoHabitacion.TipoHabitacionCreateDTO
+@{
+    ViewData["Title"] = "Tipos de Habitacion";
+}
+
+<section class="content-header">
+    <div class="text-center">
+        <h1>CREAR TIPO DE HABITACIÓN</h1>
+    </div>
+</section>
+
+<section class="content invoice">
+    <div class="">
+        <form asp-controller="TipoHabitacion" asp-action="Crear" method="post" class="" id="frm">
+            <div class="form-group">
+                <label asp-for="TcNomTipoHabitacion">Nombre</label>
+                <input asp-for="TcNomTipoHabitacion" class="form-control" placeholder="Nombre">
+                <span asp-validation-for="TcNomTipoHabitacion" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+
+    <div class="">
+        <button type="submit" form="frm" class="btn btn-primary">Crear</button>
+        <a asp-controller="TipoHabitacion"
+           asp-action="Index"
+           class="btn btn-danger">Cancelar</a>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    @if (ViewData["ActionResult"] != null)
+    {
+        <script>
+            toastr["error"]("@ViewData["ActionResult"].ToString()", "Crear Tipo de Habitacion")
+        </script>
+    }
+}

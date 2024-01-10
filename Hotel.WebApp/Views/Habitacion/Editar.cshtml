@@ -1,0 +1,69 @@
+﻿@model Hotel.WebApp.ViewModels.Habitacion.HabitacionEditViewModel
+@{
+    ViewData["Title"] = "Habitaciones";
+}
+
+<section class="content-header">
+    <div class="text-center">
+        <h1>EDITAR HABITACIÓN</h1>
+    </div>
+</section>
+
+<section class="content invoice">
+    <div class="">
+        <form asp-controller="Habitacion" asp-action="Editar" method="post" class="" id="frm">
+            <input asp-for="Habitacion.Id" type="hidden" />
+            <input asp-for="Habitacion.TcNomTipoHabitacion" type="hidden" />
+            <div class="form-group">
+                <label asp-for="Habitacion.TcNombreHabitacion">Nombre</label>
+                <input asp-for="Habitacion.TcNombreHabitacion" class="form-control" placeholder="Nombre">
+                <span asp-validation-for="Habitacion.TcNombreHabitacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Habitacion.TcDscHabitacion">Descripción</label>
+                <input asp-for="Habitacion.TcDscHabitacion" class="form-control" placeholder="Descripción">
+                <span asp-validation-for="Habitacion.TcDscHabitacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Habitacion.TdPrecioXnoche">Precio por Noche</label>
+                <input asp-for="Habitacion.TdPrecioXnoche" class="form-control" placeholder="Precio por Noche" type="number">
+                <span asp-validation-for="Habitacion.TdPrecioXnoche" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Habitacion.TcTamanoHabitacion">Tamaño</label>
+                <input asp-for="Habitacion.TcTamanoHabitacion" class="form-control" placeholder="Tamaño">
+                <span asp-validation-for="Habitacion.TcTamanoHabitacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Habitacion.TcDscAmenidades">Descripción Amenidades</label>
+                <input asp-for="Habitacion.TcDscAmenidades" class="form-control" placeholder="Descripción Amenidades">
+                <span asp-validation-for="Habitacion.TcDscAmenidades" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Habitacion.TnIdTipoHabitacion">Tipo de Habitación</label>
+                @Html.DropDownList("TnIdTipoHabitacion", Model.TipoHabitacionSelectListItems, "Seleccionar Tipo de Habitación", new { @class = "form-control" })
+                <span asp-validation-for="Habitacion.TnIdTipoHabitacion" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+
+    <div class="">
+        <button type="submit" form="frm" class="btn btn-primary">Editar</button>
+        <a asp-controller="Habitacion"
+           asp-action="Index"
+           class="btn btn-danger">Cancelar</a>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    @if (ViewData["ActionResult"] != null)
+    {
+        <script>
+            toastr["error"]("@ViewData["ActionResult"].ToString()", "Editar Habitacion")
+        </script>
+    }
+}

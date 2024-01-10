@@ -1,0 +1,35 @@
+﻿@model List<Hotel.WebApp.Models.Usuario.UsuarioDTO>
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+<section class="content-header">
+    <div class="text-center">
+        <h1>GESTIONAR USUARIOS</h1>
+    </div>
+</section>
+
+<section class="content invoice">
+
+
+    @{
+        await Html.RenderPartialAsync("_UsuarioTablePartial", Model);
+    }
+
+    <div class="">
+        <a asp-controller="Usuario"
+           asp-action="Registrar"
+           class="btn btn-primary">Crear Nuevo</a>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/js/usuario.js"></script>
+
+    @if (TempData["ActionResult"] != null)
+    {
+        <script>
+            toastr["success"]("@TempData["ActionResult"].ToString()", "Registrar Usuario")
+        </script>
+    }
+}

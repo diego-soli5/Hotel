@@ -1,0 +1,63 @@
+﻿@model Hotel.WebApp.Models.Cliente.ClienteDTO
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<section class="content-header">
+    <div class="text-center">
+        <h1>EDITAR CLIENTE</h1>
+    </div>
+</section>
+
+<section class="content invoice">
+    <div class="">
+        <form asp-controller="Cliente" asp-action="Editar" method="post" class="" id="frm">
+            <input asp-for="Id" type="hidden" />
+            <div class="form-group">
+                <label asp-for="TcNombre">Nombre</label>
+                <input asp-for="TcNombre" class="form-control" placeholder="Nombre">
+                <span asp-validation-for="TcNombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TcAp1">Primer Apellido</label>
+                <input asp-for="TcAp1" class="form-control" placeholder="Primer Apellido">
+                <span asp-validation-for="TcAp1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TcAp2">Segundo Apellido</label>
+                <input asp-for="TcAp2" class="form-control" placeholder="Segundo Apellido">
+                <span asp-validation-for="TcAp2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TcNumTelefono">Número de Teléfono</label>
+                <input asp-for="TcNumTelefono" class="form-control" placeholder="Número de Teléfono">
+                <span asp-validation-for="TcNumTelefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TcCorreoElectronico">Correo Electrónico</label>
+                <input asp-for="TcCorreoElectronico" class="form-control" placeholder="Correo Electrónico" type="email">
+                <span asp-validation-for="TcCorreoElectronico" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+
+    <div class="">
+        <button type="submit" form="frm" class="btn btn-primary">Editar</button>
+        <a asp-controller="Cliente"
+           asp-action="Index"
+           class="btn btn-danger">Cancelar</a>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    @if (ViewData["ActionResult"] != null)
+    {
+        <script>
+            toastr["error"]("@ViewData["ActionResult"].ToString()", "Editar Cliente")
+        </script>
+    }
+}

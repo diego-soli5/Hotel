@@ -1,0 +1,33 @@
+﻿@model List<Hotel.WebApp.Models.Cliente.ClienteDTO>
+@{
+    ViewData["Title"] = "Clientes";
+}
+<section class="content-header">
+    <div class="text-center">
+        <h1>GESTIONAR CLIENTES</h1>
+    </div>
+</section>
+
+<section class="content invoice">
+
+    @{
+        await Html.RenderPartialAsync("_ClienteTablePartial", Model);
+    }
+
+    <div class="">
+        <a asp-controller="Cliente"
+           asp-action="Crear"
+           class="btn btn-primary">Crear Nuevo</a>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/js/cliente.js"></script>
+
+    @if (TempData["ActionResult"] != null)
+    {
+        <script>
+            toastr["success"]("@TempData["ActionResult"].ToString()", "@TempData["ActionResultType"].ToString()")
+        </script>
+    }
+}

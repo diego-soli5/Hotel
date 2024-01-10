@@ -1,0 +1,57 @@
+﻿@model Hotel.WebApp.Models.Usuario.RegisterDTO
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+<section class="content-header">
+    <div class="text-center">
+        <h1>CREAR USUARIO</h1>
+    </div>
+</section>
+
+<section class="content invoice">
+    <div class="">
+        <form asp-controller="Usuario" asp-action="Registrar" method="post" class="" id="frm">
+            <div class="form-group">
+                <label asp-for="TcNombre">Nombre</label>
+                <input asp-for="TcNombre" class="form-control" placeholder="Nombre">
+                <span asp-validation-for="TcNombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TcNombreUsuario">Nombre Usuario</label>
+                <input asp-for="TcNombreUsuario" class="form-control" placeholder="Nombre Usuario">
+                <span asp-validation-for="TcNombreUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TcCorreo">Correo Electrónico</label>
+                <input asp-for="TcCorreo" class="form-control" placeholder="Correo Electrónico" type="email">
+                <span asp-validation-for="TcCorreo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TcClave">Contraseña</label>
+                <input asp-for="TcClave" class="form-control" placeholder="Contraseña" type="password">
+                <span asp-validation-for="TcClave" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+
+    <div class="">
+        <button type="submit" form="frm" class="btn btn-primary">Crear</button>
+        <a asp-controller="Usuario"
+           asp-action="Index"
+           class="btn btn-danger">Cancelar</a>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    @if (ViewData["ActionResult"] != null)
+    {
+        <script>
+            toastr["error"]("@ViewData["ActionResult"].ToString()", "Registrar Usuario")
+        </script>
+    }
+}

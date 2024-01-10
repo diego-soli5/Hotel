@@ -1,0 +1,56 @@
+﻿@model List<Hotel.WebApp.Models.Habitacion.HabitacionDTO>
+
+<table class="table" id="tableData">
+    <thead>
+        <tr>
+            <td class="text-bold">Id</td>
+            <td class="text-bold">Nombre</td>
+            <td class="text-bold">Descripción</td>
+            <td class="text-bold">Precio por Noche</td>
+            <td class="text-bold">Tamaño</td>
+            <td class="text-bold">Descripción Amenidades</td>
+            <td class="text-bold">Tipo de Habitación</td>
+            <td class="text-bold">Acciones</td>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            @foreach (var habitacion in Model)
+            {
+                <tr>
+                    <td>@habitacion.Id</td>
+                    <td>@habitacion.TcNombreHabitacion</td>
+                    <td>@habitacion.TcDscHabitacion</td>
+                    <td>@habitacion.TdPrecioXnoche</td>
+                    <td>@habitacion.TcTamanoHabitacion</td>
+                    <td>@habitacion.TcDscAmenidades</td>
+                    <td>@habitacion.TcNomTipoHabitacion</td>
+                    <td>
+
+                        <a asp-controller="Habitacion"
+                           asp-action="Editar"
+                           asp-route-id="@habitacion.Id"
+                           class="btn btn-sm btn-success text-center">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+
+                        <a asp-controller="Habitacion"
+                           asp-action="Eliminar"
+                           asp-route-id="@habitacion.Id"
+                           id="btnDelete"
+                           class="btn btn-sm btn-danger text-center">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="8" class="text-center"><span class="text-danger">No hay registros disponibles.</span></td>
+            </tr>
+        }
+    </tbody>
+</table>
